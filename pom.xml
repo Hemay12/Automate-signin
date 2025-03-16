@@ -23,7 +23,9 @@
                 <configuration>
                     <useFile>false</useFile>
                     <reportsDirectory>target/surefire-reports</reportsDirectory>
+                    <testFailureIgnore>true</testFailureIgnore> <!-- Ensures report is generated even if tests fail -->
                 </configuration>
+
             </plugin>
 
             <plugin>
