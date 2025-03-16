@@ -1,0 +1,50 @@
+name: automate sign in with failure email
+
+on:
+  schedule:
+    - cron: "0 9 * * 1-5" # Runs at 9:00 AM UTC, Monday to Friday
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    - name: Run Tests and Generate Reports
+      run: mvn test -Dsurefire.reportFormat=xml -DreportOutputDirectory=target/surefire-reports
+
+    # Upload Test Reports
+    - name: Upload Test Reports
+      if: always() # Upload reports even if the test fails
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-reports
+        path: target/surefire-reports/
+
+    # Send Email on Failure
+    - name: Send Email Notification
+      if: failure() # Triggers only if the workflow fails
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ hemaysorathia1@gmail.com }}
+        password: ${{ cavq fwop dflz jzwn }}
+        subject: "GitHub Actions Test Failed 🚨"
+        to: "your-email@example.com"
+        body: "The automation test failed. Please check the logs and test reports in GitHub Actions."
+        from: "GitHub Actions"
+
