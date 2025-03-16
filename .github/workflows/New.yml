@@ -30,6 +30,10 @@ jobs:
           echo "Checking report directory..."
           ls -R target/surefire-reports || echo "❌ No reports found!"
 
+      - name: Generate Surefire Test Report
+        run: mvn surefire-report:report || echo "⚠️ Surefire report generation failed!"
+
+
       - name: Upload Test Reports
         if: always()
         uses: actions/upload-artifact@v4
