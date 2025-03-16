@@ -38,3 +38,7 @@ jobs:
           name: test-reports
           path: target/surefire-reports/
           if-no-files-found: warn  # Warn if no files are found
+
+      - name: Generate Test Report
+        run: mvn surefire-report:report
+
