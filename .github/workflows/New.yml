@@ -2,7 +2,7 @@ name: automate sign in with failure email
 
 on:
   schedule:
-    - cron: "05 11 * * *"  # Runs at 9:30 AM UTC every day
+    - cron: "35 05 * * *"  # Runs at 9:30 AM UTC every day
   workflow_dispatch:
 
 jobs:
