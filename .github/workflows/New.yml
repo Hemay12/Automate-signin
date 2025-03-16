@@ -28,14 +28,15 @@ jobs:
             mvn test -Dsurefire.reportFormat=xml -DreportOutputDirectory=target/surefire-reports 
             ls -R target/surefire-reports || echo "No reports generated"
 
-    # Upload Test Reports
     - name: Upload Test Reports
       if: always() # Upload reports even if the test fails
       uses: actions/upload-artifact@v4
       with:
         name: test-reports
         path: target/surefire-reports/
+        if-no-files-found: ignore  # Prevents workflow failure if no reports exist
 
+        
     # Send Email on Failure
     - name: Send Email Notification
       if: failure() # Triggers only if the workflow fails
@@ -43,8 +44,8 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 587
-        username: "hemaysorathia1@gmail.com"
-        password: "cavq fwop dflz jzwn"
+        username: ${{ secrets.EMAIL_USER }}  # ✅ Use Secret
+        password: ${{ secrets.EMAIL_PASS }} 
         subject: "GitHub Actions Test Failed 🚨"
         to: "hemaysorathia1@gmail.com"
         body: "The automation test failed. Please check the logs and test reports in GitHub Actions."
