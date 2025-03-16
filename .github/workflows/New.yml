@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASS }}
           subject: "❌ Test Failure Report"
           body: "Test execution failed. Please check the attached report."
-          to: your-email@example.com
+          to: hemaysorathia1@gmail.com
           from: GitHub Actions
           attachments: target/surefire-reports/emailable-report.html
 
