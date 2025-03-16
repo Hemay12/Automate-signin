@@ -21,11 +21,17 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M7</version>
                 <configuration>
-                    <useFile>false</useFile>
                     <reportsDirectory>target/surefire-reports</reportsDirectory>
-                    <testFailureIgnore>true</testFailureIgnore> <!-- Ensures report is generated even if tests fail -->
+                    <includes>
+                        <include>**/signin.java</include>
+                    </includes>
                 </configuration>
+            </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.9.1</version>
             </plugin>
 
             <plugin>
@@ -35,6 +41,7 @@
             </plugin>
         </plugins>
     </build>
+
 
 
 
