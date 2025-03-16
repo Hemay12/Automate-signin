@@ -1,9 +1,9 @@
-name: automate sigin
+name: automate signin 
 
 on:
   schedule:
     - cron: "05 11 * * *"  # Runs every day at 11:05 AM UTC
-  workflow_dispatch:
+  workflow_dispatch: 
 
 jobs:
   test:
@@ -30,10 +30,6 @@ jobs:
           echo "Checking report directory..."
           ls -R target/surefire-reports || echo "❌ No reports found!"
 
-      - name: Generate Surefire Test Report
-        run: mvn surefire-report:report || echo "⚠️ Surefire report generation failed!"
-
-
       - name: Upload Test Reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -42,20 +38,15 @@ jobs:
           path: target/surefire-reports/
           if-no-files-found: warn  # Warn if no files are found
 
-      - name: Generate Test Report
-        run: mvn surefire-report:report
-
-      - name: Send Email on Failure
+      - name: Send Email Notification on Failure
         if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
-          server_port: 465
+          server_port: 587
           username: ${{ secrets.EMAIL_USER }}
           password: ${{ secrets.EMAIL_PASS }}
-          subject: "❌ Test Failure Report"
-          body: "Test execution failed. Please check the attached report."
-          to: hemaysorathia1@gmail.com
-          from: GitHub Actions
-          attachments: target/surefire-reports/emailable-report.html
-
+          subject: "GitHub Actions Test Failed 🚨"
+          to: "hemaysorathia1@gmail.com"
+          body: "The automation test failed. Please check the logs and test reports in GitHub Actions."
+          from: "GitHub Actions"
