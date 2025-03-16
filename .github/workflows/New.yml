@@ -24,7 +24,9 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Run Tests and Generate Reports
-      run: mvn test -Dsurefire.reportFormat=xml -DreportOutputDirectory=target/surefire-reports
+      run: | 
+            mvn test -Dsurefire.reportFormat=xml -DreportOutputDirectory=target/surefire-reports 
+            ls -R target/surefire-reports || echo "No reports generated"
 
     # Upload Test Reports
     - name: Upload Test Reports
@@ -44,7 +46,7 @@ jobs:
         username: "hemaysorathia1@gmail.com"
         password: "cavq fwop dflz jzwn"
         subject: "GitHub Actions Test Failed 🚨"
-        to: "your-email@example.com"
+        to: "hemaysorathia1@gmail.com"
         body: "The automation test failed. Please check the logs and test reports in GitHub Actions."
         from: "GitHub Actions"
 
