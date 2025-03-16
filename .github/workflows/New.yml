@@ -2,8 +2,8 @@ name: automate sign in with failure email
 
 on:
   schedule:
-    - cron: "50 10 * * *" # Runs at 9:30 AM UTC, everyday
-  workflow_dispatch: # Allows manual trigger
+    - cron: "05 11 * * *"  # Runs at 9:30 AM UTC every day
+  workflow_dispatch:
 
 jobs:
   build:
