@@ -1,10 +1,9 @@
-name: Run Selenium Tests
+name: automate sigin
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
+  schedule:
+    - cron: "05 11 * * *"  # Runs every day at 11:05 AM UTC
+  workflow_dispatch:
 
 jobs:
   test:
@@ -41,4 +40,18 @@ jobs:
 
       - name: Generate Test Report
         run: mvn surefire-report:report
+
+      - name: Send Email on Failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "❌ Test Failure Report"
+          body: "Test execution failed. Please check the attached report."
+          to: your-email@example.com
+          from: GitHub Actions
+          attachments: target/surefire-reports/emailable-report.html
 
