@@ -2,7 +2,7 @@ name: automate sign in with failure email
 
 on:
   schedule:
-    - cron: "20 9 * * *" # Runs at 9:00 AM UTC, Monday to Friday
+    - cron: "30 9 * * *" # Runs at 9:30 AM UTC, everyday
   workflow_dispatch: # Allows manual trigger
 
 jobs:
@@ -41,8 +41,8 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 587
-        username: ${{ hemaysorathia1@gmail.com }}
-        password: ${{ cavq fwop dflz jzwn }}
+        username: "hemaysorathia1@gmail.com"
+        password: "cavq fwop dflz jzwn"
         subject: "GitHub Actions Test Failed 🚨"
         to: "your-email@example.com"
         body: "The automation test failed. Please check the logs and test reports in GitHub Actions."
