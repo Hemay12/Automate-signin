@@ -25,6 +25,12 @@
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
+                    <properties>
+                        <property>
+                            <name>surefire.reportFormat</name>
+                            <value>xml</value>  <!-- Generate XML reports -->
+                        </property>
+                    </properties>
                 </configuration>
             </plugin>
 
