@@ -24,7 +24,7 @@ public class signin {
         WebElement userName = driver.findElement(By.cssSelector("#login_field"));
         userName.sendKeys("Hemay12");
         WebElement password = driver.findElement(By.xpath("//input[@type='password']"));
-        password.sendKeys("Hemay@123");
+        password.sendKeys("Hemay@1234");
 
         WebElement submit = driver.findElement(By.xpath("//input[@type='submit']"));
         submit.click();
