@@ -19,17 +19,21 @@ public class signin {
     @Test
     public void automateSignIn(){
 
-        driver.get("https://github.com/login");
+        driver.get("https://innovateoperations.greythr.com/uas/portal/auth/login?login_challenge=88ae8dc9775c4bb98bb8721662169720");
 
-        WebElement userName = driver.findElement(By.cssSelector("#login_field"));
-        userName.sendKeys("Hemay12");
-        WebElement password = driver.findElement(By.xpath("//input[@type='password']"));
-        password.sendKeys("Hemay@1234");
+        WebElement userName = driver.findElement(By.cssSelector("#username"));
+        userName.sendKeys("1265");
+        WebElement password = driver.findElement(By.cssSelector("#password"));
+        password.sendKeys("Kinnu@1731");
 
-        WebElement submit = driver.findElement(By.xpath("//input[@type='submit']"));
+        WebElement submit = driver.findElement(By.xpath("//button[text()=' Log in ']"));
         submit.click();
 
-        Assert.assertTrue(driver.getPageSource().contains("Incorrect username or password"), "Login error message not found!");
+        Thread.sleep(5000);
+
+        driver.findElement(By.xpath("//button[contains(text(), 'Sign In')]")).click();
+
+        // Assert.assertTrue(driver.getPageSource().contains("Incorrect username or password"), "Login error message not found!");
 
     }
 
